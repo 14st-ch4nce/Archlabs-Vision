@@ -11,11 +11,17 @@
 #
 ##################################################################################################################
 
-# troubles with gstreamer 02/2017
-# packer gstreamer0.10-base
+sudo pacman -S lib32-fontconfig  --needed --noconfirm
+sudo pacman -S lib32-libpng12 --needed --noconfirm
+sudo pacman -S lib32-libsm --needed --noconfirm
+sudo pacman -S lib32-libxinerama --needed --noconfirm
+sudo pacman -S lib32-libxrender --needed --noconfirm
+sudo pacman -S lib32-libjpeg6-turbo --needed --noconfirm
+sudo pacman -S lib32-libxtst --needed --noconfirm
 
-package="radiotray"
-command="radiotray"
+
+package="teamviewer"
+command="teamviewer"
 
 #----------------------------------------------------------------------------------
 
@@ -58,7 +64,15 @@ else
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo "!!!!!!!!!  "$package" has NOT been installed"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-
+	echo "Teamviewer needs 32 bits applications"
+	echo "Go to /etc/pacman.conf and edit these lines"
+	echo "[multilib]"
+	echo "Include = /etc/pacman.d/mirrorlist"
+	echo "Include this mirrorlist as well"
+	sleep 2
 	fi
 
 fi
+
+sudo systemctl enable teamviewerd.service
+sudo systemctl start teamviewerd.service

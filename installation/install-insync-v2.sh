@@ -11,11 +11,14 @@
 #
 ##################################################################################################################
 
-# troubles with gstreamer 02/2017
-# packer gstreamer0.10-base
+echo "Do not forget to change with qtconfig-qt4"
+echo " to something else than gkt+ and save "
+echo " then in terminal -- insync start"
 
-package="radiotray"
-command="radiotray"
+echo "Press enter to continue"; read dummy;
+
+package="insync"
+command="insync"
 
 #----------------------------------------------------------------------------------
 

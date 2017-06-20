@@ -9,7 +9,7 @@ set -e
 #======================================================================================
 
 echo "################################################################"
-echo "####             Installing reflector                        ###"
+echo "####             Installing reflector if needed             ####"
 echo "################################################################"
 
 
@@ -18,29 +18,30 @@ sudo pacman -S --noconfirm --needed reflector
 
 
 echo "################################################################"
-echo "####   finding fastest servers be patient for the world      ###"
+echo "####   finding fastest servers be patient in BE NL FR DE GB  ###"
 echo "################################################################"
 
 # finding the fastest archlinux servers
 
-sudo reflector -l 100 -f 50 --sort rate --threads 5 --verbose --save /tmp/mirrorlist.new && rankmirrors -n 0 /tmp/mirrorlist.new > /tmp/mirrorlist && sudo cp /tmp/mirrorlist /etc/pacman.d
+sudo reflector -l 100 -f 50 -c BE -c NL -c FR -c DE -c GB --sort rate --threads 5 --verbose --save /tmp/mirrorlist.new && rankmirrors -n 0 /tmp/mirrorlist.new > /tmp/mirrorlist && sudo cp /tmp/mirrorlist /etc/pacman.d
 
 
 echo "################################################################"
-echo "####       fastest servers  saved                            ###"
+echo "####     fastest arch servers in above countries saved      ####"
 echo "################################################################"
 
 
 cat /etc/pacman.d/mirrorlist
 
+
 echo "################################################################"
-echo "####              Checking for possible updates             ####"
+echo "####               Checking for possible updates            ####"
 echo "################################################################"
 
 sudo pacman -Syu --noconfirm
 
 
 echo "################################################################"
-echo "#####         Your system is now up to date                 ####"
+echo "####             Your system is now up to date              ####"
 echo "################################################################"
 

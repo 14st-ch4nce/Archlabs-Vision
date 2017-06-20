@@ -1,4 +1,3 @@
-###########################################################################
 ############  Original Settings for Reference Material    #################
 ###########################################################################
 
@@ -345,16 +344,19 @@ font pango:Noto Mono Regular 13
 ################### MENU ######################
 
 # start dmenu
-bindsym $mod+d exec dmenu_run -fn 'NotoMonoRegular:bold:pixelsize=18' 
+bindsym $mod+shift+d exec dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14' 
 
-# start j4-dmenu (based on desktop files in /usr/share/applications)
-# https://github.com/enkore/j4-dmenu-desktop
-bindsym $mod+shift+d exec j4-dmenu-desktop --dmenu="dmenu -fn 'DroidSansMono:bold:pixelsize=16' -nb '#fdf6e3' -nf '#586c75' -sf '#fdf6e3' -sb '#FFAF00'"
-#bindsym $mod+shift+d exec j4-dmenu-desktop --dmenu="dmenu -fn 'monospace:bold:pixelsize=15'"
+# start xfce-appfinder
+bindsym mod1+F3 exec xfce4-appfinder
 
-# start up i3-dmenu-desktop
-bindsym $mod+mod1+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn 'Inconsolata:bold:pixelsize=20S'"
+# start rofi full
+bindsym CTRL+space exec rofi -modi drun,run -show drun -fullscreen -font "Noto Sans 13"
 
+# start rofi small
+bindsym CTRL+SHIFT+space exec rofi -modi drun,run -show drun -font "Noto Sans 13"
+
+# gmrun
+bindsym mod1+F2 exec gmrun
 
 ################### DUAL SCREEN ######################
 
@@ -363,10 +365,12 @@ bindsym $mod+mod1+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn 'In
 # use xrandr and/or arandr to know the names of your monitors
 # use this line to tell which monitor is on the right
 # xrandr --output DVI-I-2 --right-of DVI-I-1 --auto
+exec xrandr --output HDMI2 --right-of HDMI1 --auto
+
 
 # my current setup
-set $firstMonitor DVI-I-1
-set $secondMonitor DVI-I-2
+set $firstMonitor HDMI1
+set $secondMonitor HDMI2
 
 #set $firstMonitor LVDS1
 #set $secondMonitor LVDS1
@@ -440,9 +444,9 @@ bindsym $mod+Shift+agrave move container to workspace 10; workspace 10
 # Assign application to start on a specific workspace
 # you can find the class with the program xprop
 
-assign [class="Firefox|Vivaldi-stable|Opera"]                                       → 1
+assign [class="Firefox|Vivaldi-stable|Vivaldi-snapshot|Opera"]                      → 1
 assign [class="sublime-text|sublime_text|Sublime_text|subl|Subl|subl3|Subl3"]       → 2
-assign [class="Xed|xed|Brackets|Atom|Code"]                                         → 2
+assign [class="Xed|xed|Brackets|Atom|Code|Geany"]                                   → 2
 assign [class="Inkscape"]                                                           → 3
 assign [class="Gimp"]                                                               → 4
 assign [class="ristretto|Ristretto|shotwell|Shotwell|Xviewer"]                      → 5
@@ -461,7 +465,8 @@ for_window [class="Spotify"] move to workspace 10
 
 
 # TRAY APPLICATIONS
-
+#thunar as daemon
+exec thunar --daemon &
 # num lock activated
 exec_always --no-startup-id numlockx on
 # dropbox
@@ -469,9 +474,9 @@ exec dropbox start
 # insync
 exec insync start
 # volume
-exec pasystray
+#exec pasystray
 #exec volti
-#exec volumeicon
+exec volumeicon
 #variety
 exec variety
 
@@ -484,8 +489,8 @@ exec clipit
 #distro dependent applications are at bottom of config like filemanager ...
 
 #browsers
-exec firefox
-for_window [class="Firefox"] focus
+exec vivaldi-snapshot
+for_window [class="Vivaldi-snapshot"] focus
 
 #Mail clients
 #exec evolution
@@ -614,6 +619,7 @@ for_window [class="Imagewriter"] floating enable
 for_window [class="Xfce4-settings-manager"] floating disable
 for_window [class="Gnome-control-center"] floating disable
 for_window [class="Gnome-terminal"] focus
+for_window [class="Termite"] focus
 
 #Popups during fullscreen mode
 popup_during_fullscreen smart
@@ -718,7 +724,7 @@ exec setxkbmap be
 
 
 # get the mouse out of the way with unclutter
-exec unclutter 
+#exec unclutter 
 
 
 
@@ -946,25 +952,28 @@ exec_always compton --config ~/.config/i3/compton.conf
 # gsettings set org.cinnamon.desktop.default-applications.terminal exec /usr/bin/terminator
 # gsettings set org.cinnamon.desktop.default-applications.terminal exec /usr/bin/gnome-terminal
 
-bindsym $mod+Return exec gnome-terminal;focus
+bindsym $mod+Return exec termite;focus
+#bindsym $mod+Return exec gnome-terminal;focus
 #bindsym $mod+Return exec i3-sensible-terminal;focus
 #bindsym $mod+Return exec terminator;focus
 #bindsym $mod+Return exec mate-terminal;focus
 #bindsym $mod+Return exec xfce4-terminal;focus
 
-
-bindsym control+mod1+t exec gnome-terminal; focus
+bindsym control+mod1+t exec termite; focus
+#bindsym control+mod1+t exec gnome-terminal; focus
 #bindsym control+mod1+t exec terminator;focus
 #bindsym control+mod1+t exec mate-terminal; focus
 #bindsym control+mod1+t exec xfce4-terminal; focus
 
 
 #System monitor
-bindsym control+Shift+Escape exec gnome-system-monitor;focus
+bindsym control+Shift+Escape exec xfce4-taskmanager;focus
+#bindsym control+Shift+Escape exec gnome-system-monitor;focus
 #bindsym control+Shift+Escape exec mate-system-monitor;focus
 #bindsym control+Shift+Escape exec xfce4-taskmanager;focus
 
 #settings
+bindsym control+mod1+n exec xfce4-settings-manager
 #bindsym control+mod1+n exec cinnamon-settings
 #bindsym control+mod1+n exec gnome-control-center
 #bindsym control+mod1+n exec mate-control-center
@@ -978,17 +987,17 @@ bindsym $mod+F2 exec subl3;workspace 2;focus
 bindsym control+mod1+w exec subl3;workspace 2;focus
 
 #workspace 8 related
-bindsym $mod+F8 exec nemo --no-desktop;workspace 8;focus
+#bindsym $mod+F8 exec nemo --no-desktop;workspace 8;focus
 #bindsym $mod+F8 exec nautilus --no-desktop;workspace 8;focus
 #bindsym $mod+F8 exec caja;workspace 8;focus
-#bindsym $mod+F8 exec thunar;workspace 8;focus
+bindsym $mod+F8 exec thunar;workspace 8;focus
 
 #file managers
 
-exec nemo --no-desktop
+#exec nemo --no-desktop
 #exec nautilus --no-desktop
 #exec caja
-#exec thunar
+exec thunar
 
 #filemanager focus
 for_window [class="Nemo"] focus
@@ -996,15 +1005,15 @@ for_window [class="Nautilus"] focus
 for_window [class="Caja"] focus
 for_window [class="Thunar"] focus
 
-bindsym $mod+Shift+Return exec nemo --no-desktop; workspace 8;focus
+#bindsym $mod+Shift+Return exec nemo --no-desktop; workspace 8;focus
 #bindsym $mod+Shift+Return exec nautilus --no-desktop; workspace 8;focus
 #bindsym $mod+Shift+Return exec caja; workspace 8;focus
-#bindsym $mod+Shift+Return exec thunar; workspace 8;focus
+bindsym $mod+Shift+Return exec thunar; workspace 8;focus
 
-bindsym control+mod1+b exec nemo --no-desktop;workspace 8;focus
+#bindsym control+mod1+b exec nemo --no-desktop;workspace 8;focus
 #bindsym control+mod1+b exec nautilus --no-desktop;workspace 8;focus
 #bindsym control+mod1+b exec caja;workspace 8;focus
-#bindsym control+mod1+b exec thunar;workspace 8;focus
+bindsym control+mod1+b exec thunar;workspace 8;focus
 
 
 # USER APPLICATIONS TO START AT BOOT
@@ -1015,8 +1024,11 @@ exec subl3
 
 #Authentication dialog
 
-#arch budgie
+#archlabs
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+#arch budgie
+#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 #Linux Mint
 #exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
@@ -1034,7 +1046,7 @@ exec blueberry-tray
 #exec --no-startup-id blueman-applet
 
 # network
-#antergos
+#antergos - ArchLabs - Archlinux
 exec --no-startup-id nm-applet
 
 #install this program for applet
